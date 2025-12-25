@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infoglobonet • Desenvolvimento de Aplicações e Web Sites</title>
+  <meta name="description" content="Infoglobonet - Soluções completas em desenvolvimento de aplicações SaaS, sites institucionais, landing pages de alta conversão, e-commerces e sistemas sob medida." />
+
+  <!-- ===================== FONTS & ICONS ===================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- ===================== GOOGLE ANALYTICS 4 ===================== -->
+  <!-- TODO: Substitua G-XXXXXXXXXX pelo seu Measurement ID do GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-XXXXXXXXXX");
+  </script>
+
+  <!-- ===================== META PIXEL (FACEBOOK) ===================== -->
+  <!-- TODO: Substitua 123456789012345 pelo seu Facebook Pixel ID -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,"script",
+    "https://connect.facebook.net/en_US/fbevents.js");
+    fbq("init", "123456789012345");
+    fbq("track", "PageView");
+  </script>
+  <noscript>
+    <img alt="facebook-pixel" height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=123456789012345&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <!-- ===================== ESTILOS GERAIS ===================== -->
+  <style>
+    :root {
+      --bg-body: #060712;
+      --bg-elevated: #0b0d1a;
+      --bg-elevated-soft: #101225;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.18);
+      --accent-strong: #2563eb;
+      --accent-gradient: linear-gradient(135deg, #3b82f6, #6366f1);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-soft: #6b7280;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --warning: #facc15;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-full: 999px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+      --shadow-subtle: 0 14px 35px rgba(15, 23, 42, 0.7);
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.24s ease-out;
+      --nav-height: 76px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 30%, #020617 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===================== LAYOUT ===================== */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: var(--text-main);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-wrapper::before {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(59, 130, 246, 0.18) 0, transparent 55%),
+        radial-gradient(circle at 100% 10%, rgba(236, 72, 153, 0.1) 0, transparent 60%),
+        radial-gradient(circle at 50% 120%, rgba(37, 99, 235, 0.28) 0, transparent 60%);
+      opacity: 0.9;
+      z-index: -2;
+    }
+
+    .page-wrapper::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0, rgba(15, 23, 42, 0.78) 0, rgba(15, 23, 42, 0.96) 30%, #020617 75%, #020617 100%);
+      z-index: -1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: var(--radius-full);
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      padding: 0.78rem 1.5rem;
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: white;
+      box-shadow: 0 16px 35px rgba(37, 99, 235, 0.65);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 45px rgba(37, 99, 235, 0.8);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.9);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.7);
+      border-color: rgba(75, 85, 99, 0.6);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(148, 163, 184, 0.95);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 33px rgba(15, 23, 42, 0.9);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.26);
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.26), rgba(15, 23, 42, 0.95));
+      color: #e5e7eb;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    /* ===================== NAVBAR ===================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9) 0, rgba(15, 23, 42, 0.98) 60%, rgba(15, 23, 42, 1) 100%);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+    }
+
+    .navbar-inner {
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: conic-gradient(from 210deg, #3b82f6, #22c55e, #0ea5e9, #8b5cf6, #3b82f6);
+      position: relative;
+      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.55);
+      overflow: hidden;
+    }
+
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 15% 0, rgba(248, 250, 252, 0.9) 0, rgba(248, 250, 252, 0.1) 35%, rgba(15, 23, 42, 1) 100%);
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.2rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+      transition: width var(--transition-med);
+    }
+
+    .nav-links a:hover {
+      color: #e5e7eb;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-cta span {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .nav-cta span i {
+      color: #22c55e;
+      font-size: 0.7rem;
+    }
+
+    .nav-cta .btn-secondary {
+      padding-inline: 1.25rem;
+    }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-inner {
+        height: auto;
+        padding-block: 0.7rem;
+      }
+
+      .nav-links,
+      .nav-cta span {
+        display: none;
+      }
+
+      .nav-mobile-toggle {
+        display: inline-flex;
+      }
+    }
+
+    /* ===================== HERO ===================== */
+    .section-hero {
+      padding: 3rem 0 4rem;
+    }
+
+    @media (min-width: 992px) {
+      .section-hero {
+        padding: 3.5rem 0 4.5rem;
+      }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 3.2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.7rem;
+      }
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.9);
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-kicker span {
+      font-size: 0.75rem;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-kicker span i {
+      color: #22c55e;
+    }
+
+    .hero-kicker-badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.18);
+      border: 1px solid rgba(59, 130, 246, 0.8);
+      color: #bfdbfe;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 3.4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+    }
+
+    .hero-title span.highlight {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 38rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-badges .chip {
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-secondary-text {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hero-secondary-text i {
+      font-size: 0.7rem;
+      color: #22c55e;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      margin-top: 1.3rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .hero-stats-item span {
+      display: block;
+    }
+
+    .hero-stats-item strong {
+      font-size: 1rem;
+      color: #e5e7eb;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 1.4rem;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.14), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(147, 51, 234, 0.15), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -120%;
+      background: conic-gradient(from 180deg, rgba(56, 189, 248, 0.18), transparent, rgba(147, 51, 234, 0.15), transparent);
+      opacity: 0.85;
+      animation: spin 18s linear infinite;
+      z-index: -2;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: calc(var(--radius-lg) - 1px);
+      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1) 30%, rgba(15, 23, 42, 0.98) 100%);
+      z-index: -1;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-card-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-card-title span.dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero-card-badge {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #bfdbfe;
+    }
+
+    .hero-card-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 1.3rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-card-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-card-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+    }
+
+    .metric-label {
+      color: var(--text-soft);
+    }
+
+    .metric-value {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .metric-trend {
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.18);
+      color: #bbf7d0;
+    }
+
+    .metric-trend.negative {
+      background: rgba(239, 68, 68, 0.18);
+      color: #fecaca;
+    }
+
+    .metric-trend i {
+      font-size: 0.7rem;
+    }
+
+    .metric-bar {
+      position: relative;
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(30, 64, 175, 0.5);
+      overflow: hidden;
+    }
+
+    .metric-bar-fill {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22c55e, #f97316, #facc15);
+      width: 78%;
+    }
+
+    .hero-card-chart {
+      padding: 0.7rem;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.35), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+    }
+
+    .hero-card-chart-header span.sub {
+      color: var(--text-soft);
+      font-size: 0.75rem;
+    }
+
+    .hero-card-chart-body {
+      position: relative;
+      height: 130px;
+      display: flex;
+      align-items: flex-end;
+      gap: 0.35rem;
+    }
+
+    .chart-bar {
+      flex: 1;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(129, 140, 248, 1), rgba(59, 130, 246, 0.1));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-bar:nth-child(3),
+    .chart-bar:nth-child(4),
+    .chart-bar:nth-child(5) {
+      background: linear-gradient(180deg, rgba(52, 211, 153, 1), rgba(37, 99, 235, 0.1));
+    }
+
+    .chart-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(to top, rgba(15, 23, 42, 0.3) 0, transparent 60%);
+    }
+
+    .chart-bar-labels {
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      right: 4px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.56rem;
+      color: rgba(226, 232, 240, 0.7);
+    }
+
+    .chart-legend {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      margin-top: 0.3rem;
+      font-size: 0.68rem;
+      color: var(--text-soft);
+    }
+
+    .chart-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .chart-legend span i {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .chart-legend span i.primary {
+      background: #60a5fa;
+    }
+
+    .chart-legend span i.success {
+      background: #34d399;
+    }
+
+    /* ===================== SECTION WRAPPER ===================== */
+    .section {
+      padding: 1rem 0 3.2rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .section-title-block h2 {
+      font-size: 1.35rem;
+      margin-bottom: 0.15rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title-block p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .section-header .chip {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    @media (max-width: 768px) {
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+    }
+
+    /* ===================== SERVICES ===================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .services-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .service-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      padding: 1.05rem 1.05rem 0.95rem;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med), translate var(--transition-med);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.6);
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.45), transparent 55%), radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.3), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      z-index: -1;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.8);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.45rem;
+      font-size: 1.1rem;
+      background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.24), rgba(15, 23, 42, 1));
+      border: 1px solid rgba(59, 130, 246, 0.65);
+    }
+
+    .service-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .service-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .service-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.74rem;
+      color: var(--text-soft);
+    }
+
+    .service-tag {
+      padding: 0.12rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .service-delivery {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .service-delivery i {
+      color: #22c55e;
+      font-size: 0.7rem;
+    }
+
+    /* ===================== PORTFÓLIO ===================== */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .portfolio-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 1.05rem 1.05rem 0.95rem;
+      box-shadow: var(--shadow-subtle);
+      overflow: hidden;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.85);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.95);
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.28), rgba(15, 23, 42, 0.98));
+    }
+
+    .project-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.45rem;
+    }
+
+    .badge-app {
+      background: rgba(59, 130, 246, 0.18);
+      color: #bfdbfe;
+      border: 1px solid rgba(59, 130, 246, 0.9);
+    }
+
+    .badge-landing {
+      background: rgba(236, 72, 153, 0.16);
+      color: #f9a8d4;
+      border: 1px solid rgba(236, 72, 153, 0.85);
+    }
+
+    .badge-ecommerce {
+      background: rgba(34, 197, 94, 0.16);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.9);
+    }
+
+    .badge-saas {
+      background: rgba(56, 189, 248, 0.16);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.9);
+    }
+
+    .badge-delivery {
+      background: rgba(249, 115, 22, 0.16);
+      color: #fed7aa;
+      border: 1px solid rgba(249, 115, 22, 0.9);
+    }
+
+    .badge-site {
+      background: rgba(139, 92, 246, 0.16);
+      color: #ddd6fe;
+      border: 1px solid rgba(139, 92, 246, 0.9);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-name {
+      font-size: 0.97rem;
+      font-weight: 600;
+    }
+
+    .project-status {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--text-soft);
+    }
+
+    .project-status i {
+      font-size: 0.7rem;
+    }
+
+    .status-online {
+      color: #bbf7d0;
+      border-color: rgba(22, 163, 74, 0.7);
+      background: rgba(22, 163, 74, 0.16);
+    }
+
+    .status-dev {
+      color: #fed7aa;
+      border-color: rgba(249, 115, 22, 0.7);
+      background: rgba(249, 115, 22, 0.16);
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-tech span {
+      font-size: 0.7rem;
+      padding: 0.14rem 0.45rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: #e5e7eb;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      border-top: 1px dashed rgba(148, 163, 184, 0.4);
+      padding-top: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.76rem;
+      color: #bfdbfe;
+    }
+
+    .project-link i {
+      font-size: 0.8rem;
+    }
+
+    /* ===================== CONTATO ===================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 1.2rem 1.25rem 1.3rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-card p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .contact-info-list {
+      list-style: none;
+      margin-bottom: 0.9rem;
+    }
+
+    .contact-info-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-info-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.8rem;
+    }
+
+    .contact-note {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-note i {
+      font-size: 0.7rem;
+      color: #22c55e;
+    }
+
+    .contact-whatsapp-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+
+    .btn-whatsapp {
+      background: #22c55e;
+      color: #022c22;
+      border-color: #22c55e;
+      box-shadow: 0 14px 35px rgba(34, 197, 94, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .btn-whatsapp:hover {
+      background: #16a34a;
+      border-color: #16a34a;
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.75);
+    }
+
+    .btn-whatsapp-outline {
+      background: transparent;
+      border-color: rgba(34, 197, 94, 0.75);
+      color: #bbf7d0;
+      font-size: 0.85rem;
+    }
+
+    .btn-whatsapp-outline:hover {
+      background: rgba(22, 163, 74, 0.12);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 35px rgba(22, 163, 74, 0.6);
+    }
+
+    .contact-form-card {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.97);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.2rem 1.25rem 1.3rem;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.85);
+    }
+
+    .contact-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+
+    @media (max-width: 600px) {
+      .contact-form-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .form-field label {
+      font-size: 0.78rem;
+      color: rgba(209, 213, 219, 0.9);
+    }
+
+    .form-field small {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      border-radius: 10px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 0.55rem 0.7rem;
+      font-size: 0.84rem;
+      color: #e5e7eb;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+      resize: none;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(148, 163, 184, 0.7);
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.7), 0 12px 30px rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.98);
+      transform: translateY(-0.5px);
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.7rem;
+      margin-top: 0.3rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .form-policy {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .form-policy i {
+      font-size: 0.75rem;
+      color: #22c55e;
+    }
+
+    /* ===================== FOOTER ===================== */
+    .footer {
+      padding: 1.6rem 0 2.1rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.16);
+      margin-top: auto;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96) 0, rgba(15, 23, 42, 1) 40%);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-soft);
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+    }
+
+    /* ===================== WHATSAPP FLOAT BUTTON ===================== */
+    .floating-whatsapp {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      background: #22c55e;
+      color: #022c22;
+      font-size: 0.86rem;
+      font-weight: 500;
+      box-shadow: 0 18px 45px rgba(22, 163, 74, 0.8);
+      border: 1px solid #16a34a;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .floating-whatsapp:hover {
+      transform: translateY(-1px);
+      background: #16a34a;
+      box-shadow: 0 22px 55px rgba(22, 163, 74, 0.9);
+    }
+
+    .floating-whatsapp i {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .floating-whatsapp span.text {
+        display: none;
+      }
+
+      .floating-whatsapp {
+        padding: 0.65rem 0.73rem;
+        border-radius: 999px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+
+    <!-- ===================== NAVBAR ===================== -->
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a href="#" class="logo">
+          <div class="logo-icon"></div>
+          <div>
+            <div class="logo-text-main">Infoglobonet</div>
+            <div class="logo-text-sub">Aplicações • Web Sites • SaaS</div>
+          </div>
+        </a>
+
+        <nav class="nav-links">
+          <a href="#servicos">Serviços</a>
+          <a href="#portfolio">Portfólio</a>
+          <a href="#contato">Contato</a>
+        </nav>
+
+        <div class="nav-cta">
+          <span><i class="fa-solid fa-circle"></i> Resposta em até 1h em horário comercial</span>
+          <a href="#contato" class="btn btn-secondary">Fale com especialista</a>
+          <button class="nav-mobile-toggle" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================== HERO ===================== -->
+    <main>
+      <section class="section-hero">
+        <div class="container">
+          <div class="hero-grid">
+            <!-- HERO LEFT -->
+            <div>
+              <div class="hero-kicker">
+                <span><i class="fa-solid fa-bolt-lightning"></i> Entregamos projetos reais, não só mockups</span>
+                <span class="hero-kicker-badge">Infoglobonet</span>
+              </div>
+
+              <h1 class="hero-title">
+                Desenvolvimento de <span class="highlight">aplicações</span> e
+                <span class="highlight">web sites</span> que geram resultado.
+              </h1>
+
+              <p class="hero-subtitle">
+                Criamos plataformas SaaS, páginas de alta conversão, sites institucionais, e-commerces e
+                soluções sob medida para negócios que precisam sair do papel ou escalar com segurança.
+              </p>
+
+              <div class="hero-badges">
+                <span class="chip"><i class="fa-solid fa-check"></i> Landing pages e sites modernos</span>
+                <span class="chip"><i class="fa-solid fa-check"></i> Aplicações SaaS & Painéis administrativos</span>
+                <span class="chip"><i class="fa-solid fa-check"></i> Integrações com meios de pagamento</span>
+              </div>
+
+              <div class="hero-actions">
+                <a href="#contato" class="btn btn-primary" onclick="trackLeadClick('hero')">
+                  Agendar conversa <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#portfolio" class="btn btn-ghost">
+                  Ver projetos <i class="fa-solid fa-grid-2"></i>
+                </a>
+                <span class="hero-secondary-text">
+                  <i class="fa-solid fa-shield-check"></i>
+                  Projetos com contrato, escopo claro e cronograma definido.
+                </span>
+              </div>
+
+              <div class="hero-stats">
+                <div class="hero-stats-item">
+                  <span>Projetos entregues</span>
+                  <strong>20+</strong>
+                </div>
+                <div class="hero-stats-item">
+                  <span>Setores atendidos</span>
+                  <strong>SaaS • Fintech • E-commerce</strong>
+                </div>
+                <div class="hero-stats-item">
+                  <span>Satisfação média</span>
+                  <strong>4.9/5</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- HERO RIGHT - CARD -->
+            <div>
+              <div class="hero-card">
+                <div class="hero-card-header">
+                  <div class="hero-card-title">
+                    <span class="dot"></span>
+                    Painel em tempo real de um dos nossos clientes
+                  </div>
+                  <span class="hero-card-badge">Projeto real</span>
+                </div>
+
+                <div class="hero-card-body">
+                  <div class="hero-card-metrics">
+                    <div class="metric-row">
+                      <span class="metric-label">Usuários ativos / mês</span>
+                      <span class="metric-value">+3.120</span>
+                    </div>
+                    <div class="metric-row">
+                      <span class="metric-label">Conversão da landing page</span>
+                      <span class="metric-value">
+                        7,8%
+                        <span class="metric-trend">
+                          <i class="fa-solid fa-arrow-trend-up"></i>
+                          +2,1 p.p após redesign
+                        </span>
+                      </span>
+                    </div>
+                    <div class="metric-row">
+                      <span class="metric-label">Tempo médio de carregamento</span>
+                      <span class="metric-value">
+                        1,1s
+                        <span class="metric-trend negative">
+                          <i class="fa-solid fa-bolt"></i>
+                          52% mais rápido
+                        </span>
+                      </span>
+                    </div>
+                    <div class="metric-row">
+                      <span class="metric-label">Status do SLA</span>
+                      <span class="metric-value">
+                        99,9% uptime
+                      </span>
+                    </div>
+                    <div class="metric-row">
+                      <span class="metric-label">Progresso do roadmap</span>
+                      <span class="metric-value">
+                        <span class="metric-bar">
+                          <span class="metric-bar-fill"></span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="hero-card-chart">
+                    <div class="hero-card-chart-header">
+                      <div>
+                        Conversões por canal
+                        <span class="sub">últimos 30 dias</span>
+                      </div>
+                      <div>+184% desde o início do projeto</div>
+                    </div>
+
+                    <div class="hero-card-chart-body">
+                      <div class="chart-bar" style="height: 38%;"></div>
+                      <div class="chart-bar" style="height: 55%;"></div>
+                      <div class="chart-bar" style="height: 68%;"></div>
+                      <div class="chart-bar" style="height: 82%;"></div>
+                      <div class="chart-bar" style="height: 94%;"></div>
+                      <div class="chart-bar" style="height: 60%;"></div>
+
+                      <div class="chart-bar-labels">
+                        <span>Ads</span>
+                        <span>SEO</span>
+                        <span>Indicação</span>
+                        <span>Social</span>
+                        <span>Email</span>
+                        <span>Orgânico</span>
+                      </div>
+                    </div>
+
+                    <div class="chart-legend">
+                      <span><i class="primary"></i> Antes da Infoglobonet</span>
+                      <span><i class="success"></i> Após redesign completo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SERVIÇOS ===================== -->
+      <section id="servicos" class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-block">
+              <h2>Serviços que a Infoglobonet entrega de ponta a ponta</h2>
+              <p>Da primeira landing page ao seu painel SaaS em produção, ajudamos em todas as etapas.</p>
+            </div>
+            <span class="chip">
+              <i class="fa-solid fa-layer-group"></i> Planejamento • UX/UI • Desenvolvimento • Go-live
+            </span>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-display"></i>
+              </div>
+              <h3 class="service-title">Landing pages e sites institucionais</h3>
+              <p class="service-desc">
+                Páginas estratégicas para captar leads, vender serviços e posicionar sua marca com clareza.
+              </p>
+              <div class="service-meta">
+                <span class="service-tag">Ideal para lançamento rápido</span>
+                <span class="service-delivery">
+                  <i class="fa-solid fa-circle-check"></i> a partir de 7 dias úteis
+                </span>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+              </div>
+              <h3 class="service-title">Aplicações SaaS e painéis web</h3>
+              <p class="service-desc">
+                Sistemas completos com autenticação, planos, cobrança recorrente e dashboards em tempo real.
+              </p>
+              <div class="service-meta">
+                <span class="service-tag">Escalável e seguro</span>
+                <span class="service-delivery">
+                  <i class="fa-solid fa-circle-check"></i> cronograma sob medida
+                </span>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <h3 class="service-title">Lojas virtuais e vendas online</h3>
+              <p class="service-desc">
+                Estrutura de e-commerce focada em performance, conversão e integração com meios de pagamento.
+              </p>
+              <div class="service-meta">
+                <span class="service-tag">Checkout otimizado</span>
+                <span class="service-delivery">
+                  <i class="fa-solid fa-circle-check"></i> integração com gateways
+                </span>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-plug-circle-bolt"></i>
+              </div>
+              <h3 class="service-title">Integrações e automações</h3>
+              <p class="service-desc">
+                Conectamos seu produto a gateways de pagamento, sistemas legados, ERPs e APIs de terceiros.
+              </p>
+              <div class="service-meta">
+                <span class="service-tag">APIs & Webhooks</span>
+                <span class="service-delivery">
+                  <i class="fa-solid fa-circle-check"></i> evita retrabalho manual
+                </span>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <h3 class="service-title">Performance e segurança</h3>
+              <p class="service-desc">
+                Otimização de tempo de carregamento, SEO técnico e boas práticas de segurança para seu projeto.
+              </p>
+              <div class="service-meta">
+                <span class="service-tag">Sites rápidos e confiáveis</span>
+                <span class="service-delivery">
+                  <i class="fa-solid fa-circle-check"></i> auditoria + melhorias
+                </span>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-handshake-angle"></i>
+              </div>
+              <h3 class="service-title">Suporte e evolução contínua</h3>
+              <p class="service-desc">
+                Manutenção, novos módulos e acompanhamento próximo para garantir que seu produto não pare.
+              </p>
+              <div class="service-meta">
+                <span class="service-tag">Parceria de longo prazo</span>
+                <span class="service-delivery">
+                  <i class="fa-solid fa-circle-check"></i> planos mensais
+                </span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PORTFÓLIO ===================== -->
+      <section id="portfolio" class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-block">
+              <h2>Alguns projetos que já saíram do papel com a Infoglobonet</h2>
+              <p>Aplicações reais em produção, atendendo negócios de diferentes segmentos.</p>
+            </div>
+            <span class="chip">
+              <i class="fa-solid fa-star"></i> Exemplo de tipos de projetos que podemos construir para você
+            </span>
+          </div>
+
+          <div class="portfolio-grid">
+            <!-- 1. App Mobile -->
+            <article class="project-card">
+              <div class="project-type-badge badge-app">
+                <i class="fa-solid fa-mobile-screen-button"></i> App Mobile + Painel Web
+              </div>
+              <div class="project-header">
+                <h3 class="project-name">Aplicativo de agendamento para clínicas</h3>
+                <span class="project-status status-online">
+                  <i class="fa-solid fa-circle"></i> Em produção
+                </span>
+              </div>
+              <p class="project-desc">
+                Plataforma que conecta pacientes, médicos e clínicas em um fluxo único de agendamento e confirmação.
+              </p>
+              <div class="project-tech">
+                <span>React Native</span>
+                <span>React</span>
+                <span>Node.js</span>
+                <span>PostgreSQL</span>
+              </div>
+              <div class="project-footer">
+                <span>Publicação em: 2024</span>
+                <a href="#contato" class="project-link">
+                  Ver semelhante para meu negócio <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- 2. Landing Page -->
+            <article class="project-card">
+              <div class="project-type-badge badge-landing">
+                <i class="fa-solid fa-bullhorn"></i> Landing Page de lançamento
+              </div>
+              <div class="project-header">
+                <h3 class="project-name">Lançamento de SaaS para gestão financeira</h3>
+                <span class="project-status status-online">
+                  <i class="fa-solid fa-circle"></i> Em produção
+                </span>
+              </div>
+              <p class="project-desc">
+                Landing page otimizada para geração de leads qualificados com foco em demonstrações agendadas.
+              </p>
+              <div class="project-tech">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Google Tag Manager</span>
+              </div>
+              <div class="project-footer">
+                <span>Conversão atual: 7,8%</span>
+                <a href="#contato" class="project-link">
+                  Quero uma landing assim <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- 3. E-commerce -->
+            <article class="project-card">
+              <div class="project-type-badge badge-ecommerce">
+                <i class="fa-solid fa-cart-shopping"></i> E-commerce personalizado
+              </div>
+              <div class="project-header">
+                <h3 class="project-name">Loja virtual de moda com provador online</h3>
+                <span class="project-status status-online">
+                  <i class="fa-solid fa-circle"></i> Em produção
+                </span>
+              </div>
+              <p class="project-desc">
+                Loja com catálogo dinâmico, cálculo de frete em tempo real e integrações com gateways de pagamento.
+              </p>
+              <div class="project-tech">
+                <span>Next.js</span>
+                <span>Node.js</span>
+                <span>Stripe</span>
+                <span>MySQL</span>
+              </div>
+              <div class="project-footer">
+                <span>Ticket médio: +32%</span>
+                <a href="#contato" class="project-link">
+                  Ver arquitetura ideal <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- 4. SaaS -->
+            <article class="project-card">
+              <div class="project-type-badge badge-saas">
+                <i class="fa-solid fa-cloud"></i> Plataforma SaaS B2B
+              </div>
+              <div class="project-header">
+                <h3 class="project-name">Gestão de contratos e documentos online</h3>
+                <span class="project-status status-online">
+                  <i class="fa-solid fa-circle"></i> Em produção
+                </span>
+              </div>
+              <p class="project-desc">
+                Solução SaaS com planos, área do cliente, faturamento recorrente e integrações com assinatura digital.
+              </p>
+              <div class="project-tech">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>MongoDB</span>
+                <span>REST APIs</span>
+              </div>
+              <div class="project-footer">
+                <span>Churn reduzido em 18%</span>
+                <a href="#contato" class="project-link">
+                  Escalar meu SaaS <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- 5. Sistema de Delivery -->
+            <article class="project-card">
+              <div class="project-type-badge badge-delivery">
+                <i class="fa-solid fa-motorcycle"></i> Sistema de delivery multi-lojas
+              </div>
+              <div class="project-header">
+                <h3 class="project-name">Plataforma de pedidos para restaurantes</h3>
+                <span class="project-status status-dev">
+                  <i class="fa-solid fa-circle-dot"></i> Em evolução
+                </span>
+              </div>
+              <p class="project-desc">
+                Gestão integrada de pedidos, entregadores e cardápios para múltiplos estabelecimentos.
+              </p>
+              <div class="project-tech">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>WebSockets</span>
+                <span>Redis</span>
+              </div>
+              <div class="project-footer">
+                <span>Roadmap até Q4 2025</span>
+                <a href="#contato" class="project-link">
+                  Entender modelo de negócio <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- 6. Site Institucional -->
+            <article class="project-card">
+              <div class="project-type-badge badge-site">
+                <i class="fa-solid fa-building"></i> Site institucional completo
+              </div>
+              <div class="project-header">
+                <h3 class="project-name">Presença digital para consultoria B2B</h3>
+                <span class="project-status status-online">
+                  <i class="fa-solid fa-circle"></i> Em produção
+                </span>
+              </div>
+              <p class="project-desc">
+                Site institucional com blog, páginas de serviço e captação de leads para equipe comercial.
+              </p>
+              <div class="project-tech">
+                <span>Next.js</span>
+                <span>Headless CMS</span>
+                <span>SEO técnico</span>
+                <span>Analytics</span>
+              </div>
+              <div class="project-footer">
+                <span>+65% leads qualificados</span>
+                <a href="#contato" class="project-link">
+                  Otimizar minha presença <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CONTATO ===================== -->
+      <section id="contato" class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-block">
+              <h2>Vamos entender o seu projeto?</h2>
+              <p>Conte rapidamente sobre sua ideia e retornaremos com próximos passos claros.</p>
+            </div>
+            <span class="chip">
+              <i class="fa-solid fa-clipboard-check"></i> Orçamento sem compromisso
+            </span>
+          </div>
+
+          <div class="contact-grid">
+            <!-- CARD INFO / WHATSAPP -->
+            <aside class="contact-card">
+              <h3>Fale direto com a Infoglobonet</h3>
+              <p>Se preferir, você pode iniciar o contato agora mesmo pelo WhatsApp ou e-mail.</p>
+
+              <ul class="contact-info-list">
+                <li>
+                  <span class="contact-info-icon">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </span>
+                  <span>WhatsApp: <strong>+55 19 98780-0666</strong></span>
+                </li>
+                <li>
+                  <span class="contact-info-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                  </span>
+                  <span>E-mail: <strong>infoglobonet0@gmail.com</strong></span>
+                </li>
+              </ul>
+
+              <p class="contact-note">
+                <i class="fa-solid fa-circle-check"></i>
+                Respondemos normalmente em menos de 1h em horário comercial.
+              </p>
+
+              <div class="contact-whatsapp-buttons">
+                <a class="btn btn-whatsapp"
+                   href="https://wa.me/5519987800666?text=Ol%C3%A1%20Infoglobonet%2C%20vim%20pelo%20site%20e%20quero%20conversar%20sobre%20um%20projeto."
+                   target="_blank" rel="noopener"
+                   onclick="trackLeadClick('whatsapp_card')">
+                  <i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp
+                </a>
+                <a class="btn btn-whatsapp-outline"
+                   href="mailto:infoglobonet0@gmail.com?subject=Contato%20pelo%20site%20Infoglobonet&body=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre..."
+                   onclick="trackLeadClick('email_card')">
+                  <i class="fa-solid fa-envelope"></i> Enviar e-mail
+                </a>
+              </div>
+            </aside>
+
+            <!-- FORMULÁRIO COM NETLIFY FORMS -->
+            <section class="contact-form-card">
+              <h3>Envie detalhes do seu projeto</h3>
+              <p>Preencha o formulário abaixo e retornaremos com ideias, prazos e valores estimados.</p>
+
+              <!-- Netlify Forms: importante manter name, data-netlify e netlify-honeypot -->
+              <form name="infoglobonet-contato" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                    onsubmit="trackFormSubmit()">
+                <!-- Campo oculto para Netlify identificar o formulário -->
+                <input type="hidden" name="form-name" value="infoglobonet-contato" />
+                <!-- Campo honeypot (anti-spam) - deve ficar escondido -->
+                <p style="display:none;">
+                  <label>Não preencha este campo: <input name="bot-field" /></label>
+                </p>
+
+                <div class="contact-form-grid">
+                  <div class="form-field">
+                    <label for="nome">Nome completo *</label>
+                    <input class="form-input" type="text" id="nome" name="nome" required
+                           placeholder="Como devemos te chamar?" />
+                  </div>
+                  <div class="form-field">
+                    <label for="email">E-mail *</label>
+                    <input class="form-input" type="email" id="email" name="email" required
+                           placeholder="seuemail@empresa.com" />
+                  </div>
+                  <div class="form-field">
+                    <label for="telefone">WhatsApp / Telefone</label>
+                    <input class="form-input" type="tel" id="telefone" name="telefone"
+                           placeholder="(DDD) 9 9999-9999" />
+                  </div>
+                  <div class="form-field">
+                    <label for="tipo_projeto">Tipo de projeto</label>
+                    <select class="form-select" id="tipo_projeto" name="tipo_projeto">
+                      <option value="">Selecione</option>
+                      <option value="landing">Landing page / site institucional</option>
+                      <option value="saas">Aplicação SaaS / sistema web</option>
+                      <option value="ecommerce">E-commerce / vendas online</option>
+                      <option value="consultoria">Consultoria em produto / tecnologia</option>
+                      <option value="outro">Outro</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-field" style="margin-bottom: 0.6rem;">
+                  <label for="detalhes">Conte em poucas linhas o que você precisa *</label>
+                  <textarea class="form-textarea" id="detalhes" name="detalhes" rows="4" required
+                            placeholder="Ex.: Preciso de uma landing page para captar leads para um SaaS de gestão financeira, com integrações a formulário e WhatsApp."></textarea>
+                </div>
+
+                <div class="form-field">
+                  <label for="prazo">Prazo ideal</label>
+                  <input class="form-input" type="text" id="prazo" name="prazo"
+                         placeholder="Ex.: Lançar em 30 dias, em 2 meses, etc." />
+                </div>
+
+                <div class="form-footer">
+                  <div class="form-policy">
+                    <i class="fa-solid fa-lock"></i>
+                    Seus dados não serão compartilhados com terceiros.
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    Enviar informações <i class="fa-solid fa-paper-plane"></i>
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          © <span id="year"></span> Infoglobonet. Todos os direitos reservados.
+        </div>
+        <div class="footer-links">
+          <a href="#servicos">Serviços</a>
+          <a href="#portfolio">Portfólio</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ===================== BOTÃO FLUTUANTE WHATSAPP ===================== -->
+  <a class="floating-whatsapp"
+     href="https://wa.me/5519987800666?text=Ol%C3%A1%20Infoglobonet%2C%20vim%20pelo%20site%20e%20quero%20conversar%20sobre%20um%20projeto."
+     target="_blank" rel="noopener"
+     onclick="trackLeadClick('whatsapp_float')">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="text">Fale agora com a Infoglobonet</span>
+  </a>
+
+  <!-- ===================== SCRIPTS BÁSICOS DO SITE ===================== -->
+  <script>
+    // Ano automático no rodapé
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Eventos simples de tracking customizado
+    function trackLeadClick(origin) {
+      // GA4
+      if (typeof gtag === "function") {
+        gtag("event", "lead_click", {
+          origin: origin
+        });
+      }
+      // Meta Pixel
+      if (typeof fbq === "function") {
+        fbq("trackCustom", "LeadClick", { origin: origin });
+      }
+    }
+
+    function trackFormSubmit() {
+      // GA4
+      if (typeof gtag === "function") {
+        gtag("event", "form_submit", {
+          form_name: "infoglobonet-contato"
+        });
+      }
+      // Meta Pixel
+      if (typeof fbq === "function") {
+        fbq("track", "Lead");
+      }
+    }
+  </script>
+
+  <!-- ===================== CHAT AO VIVO (TAWK.TO) ===================== -->
+  <!-- TODO: Crie sua conta em tawk.to e substitua o script abaixo pelo seu próprio snippet -->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      // Exemplo de widget tawk.to (substitua com o seu)
+      s1.src='https://embed.tawk.to/000000000000000000000000/1abcde123';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+</body>
+</html>
